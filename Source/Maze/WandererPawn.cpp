@@ -146,6 +146,7 @@ void AWandererPawn::ContinueSearch() {
 
 		if (!tile->IsVisited()) {
 			tile->SetVisited();
+			visitedCount++;
 
 			mazeField->SetHeroPosition(0, tilePos);
 
@@ -160,6 +161,8 @@ void AWandererPawn::ContinueSearch() {
 			if (currentMoveQueue.front() == tilePos) {
 				currentMoveQueue.pop_front();
 				AddSurroundingsToVisitQueue();
+
+				traveledCount++;
 			}
 		}
 

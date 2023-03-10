@@ -17,9 +17,11 @@ public:
 	AWandererPawn();
 
 	void SetMazeField(MazeField* mazeFieldPtr);
-	
-
 	unsigned GetSearchRadius() const {return searchRadius;}
+
+	unsigned GetVisitQueueSize() const {return visitQueue.size();}
+	unsigned GetVisitedCount() const {return visitedCount;}
+	unsigned GetTraveledCount() const {return traveledCount;}
 
 protected:
 	// Called when the game starts or when spawned
@@ -42,6 +44,8 @@ private:
 	std::deque<Vec2D> visitQueue;
 	std::deque<Vec2D> currentMoveQueue;
 
+	unsigned traveledCount = 0;
+	unsigned visitedCount = 0;
 	unsigned searchRadius = 8;
 
 	static Vec2D goalUndefined;

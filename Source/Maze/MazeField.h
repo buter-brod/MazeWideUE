@@ -84,6 +84,9 @@ public:
 	void Update();
 	void UpdateLights();
 
+	unsigned GetLightsCount() const {return lights.size();}
+	unsigned GetTilesGenerated() const {return blocksMap.size() * blockSideSize * blockSideSize;}
+
 	std::vector<Vec2D> GetTileLogicalPositionsInRadius(const Vec2D& center, unsigned radius) const;
 
 	static Vec2D GetBlockOffsetForLogicalPosition(const Vec2D& pos);

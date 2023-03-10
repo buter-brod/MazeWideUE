@@ -1,5 +1,6 @@
 #include "MazeGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
+#include "MazeHUD.h"
 
 constexpr float mazeServiceInterval = 2.f;
 
@@ -16,6 +17,15 @@ void AMazeGameModeBase::Tick(float dt) {
 	if (mazeTimer <= 0.f) {
 		mazeTimer = mazeServiceInterval;
 		mazeField->Update();
+
+		AMazeHUD* hud = Cast<AMazeHUD> (GetWorld()->GetFirstPlayerController()->GetHUD());
+		HUDInfo hudInfo;
+		hudInfo.tilesVisited = hero->GetVisitedCount();
+		hudInfo.tilesInQueue = hero->GetVisitQueueSize();
+		hudInfo.tilesTraveled = hero->GetTraveledCount();
+		hudInfo.lightsPlaced = mazeField->GetLightsCount();
+		hudInfo.tilesGenerated = mazeField->GetTilesGenerated();
+		hud->Update(hudInfo);
 	}
 }
 
